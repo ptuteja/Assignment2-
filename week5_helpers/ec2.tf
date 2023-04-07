@@ -53,3 +53,22 @@ resource "aws_key_pair" "k8s" {
   key_name   = "assignment2"
   public_key = file("${path.module}/assignment2.pub")
 }
+
+# Creating ecr repositories
+resource "aws_ecr_repository" "app" {
+  name                 = "web-repo"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
+resource "aws_ecr_repository" "sql" {
+  name                 = "mysql-repo"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
